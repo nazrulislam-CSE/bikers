@@ -218,9 +218,9 @@
                     <ul class="slide-menu">
                         <li class="side-menu__label1"><a href="javascript:void(0);">Gallery</a></li>
                         <li><a class="slide-item {{ Request::is('admin/gallery/create') ? 'active' : '' }}"
-                                href="{{ route('admin.gallery.create') }}">Service Add</a></li>
+                                href="{{ route('admin.gallery.create') }}">Gallery Add</a></li>
                         <li><a class="slide-item {{ Request::is('admin/gallery/store') ? 'active' : '' }}"
-                                href="{{ route('admin.gallery.index') }}">Service List</a></li>
+                                href="{{ route('admin.gallery.index') }}">Gallery List</a></li>
                     </ul>
                 </li>
 

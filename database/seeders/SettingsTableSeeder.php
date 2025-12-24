@@ -40,7 +40,7 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'name'  => 'phone',
-                'value' => '013',
+                'value' => '01316017328',
             ],
             [
                 'name'  => 'phone2',
@@ -48,7 +48,7 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'name'  => 'email',
-                'value' => 'test@gmail.com',
+                'value' => 'bbykersociety@gmail.com',
             ],
             [
                 'name'  => 'email2',
@@ -60,7 +60,7 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'name'  => 'business_address',
-                'value' => 'BIKER CLUB Dhaka',
+                'value' => 'Link Road,Shamoli,Dhaka',
             ],
             [
                 'name'  => 'business_hours',

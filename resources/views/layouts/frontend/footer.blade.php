@@ -1,68 +1,64 @@
-@php
-    $footer_pages = App\Models\Menuitem::with(['subMenus.childMenus'])
-        ->whereNull('parent_id')
-        ->whereHas('get_menu', function ($query) {
-            $query->where('location', 'footer1')->where('sourch', 'page');
-        })
-        ->orderby('position', 'asc')
-        ->get();
-    $footer_pages1 = App\Models\Menuitem::with(['subMenus.childMenus'])
-        ->whereNull('parent_id')
-        ->whereHas('get_menu', function ($query) {
-            $query->where('location', 'footer2')->where('sourch', 'page');
-        })
-        ->orderby('position', 'asc')
-        ->get();
-@endphp
-
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 fade-in">
-                <h5>Contact Us</h5>
-                <p>
-                    <strong>{{ get_setting('business_name')->value ?? '' }}</strong><br />
-                    Mobile: {{ get_setting('phone')->value ?? '' }}<br />
-                    {{ get_setting('email')->value ?? '' }}<br />
-                    {{ get_setting('email2')->value ?? '' }}<br />
-                    {{ get_setting('business_address')->value ?? '' }}
-                </p>
-            </div>
-            <div class="col-md-4 fade-in delay-1">
-                <h5>Service Hours</h5>
-                <p>
-                    Saturday: {{ get_setting('business_hours')->value ?? '' }}<br />
-                    Sunday: {{ get_setting('business_hours')->value ?? '' }}<br />
-                    Monday: {{ get_setting('business_hours')->value ?? '' }}<br />
-                    Tuesday: {{ get_setting('business_hours')->value ?? '' }}<br />
-                    Wednesday: {{ get_setting('business_hours')->value ?? '' }}<br />
-                    Thursday: {{ get_setting('business_hours')->value ?? '' }}<br />
-                    Friday: Closed
-                </p>
-            </div>
-            <div class="col-md-4 fade-in delay-2">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled footer-menu">
-                    @if (count($footer_pages) == 0)
-                        @for ($i = 1; $i < 5; $i++)
-                            <li><a href="#">Default Page {{ $i }}</a></li>
-                        @endfor
-                    @endif
-                    @foreach ($footer_pages->take(5) as $key => $pages)
-                        <li><a href="{{ route('footer.menu.page', $pages->url) }}">{{ $pages->title ?? '' }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            <div class="copyright-content">
-                <div class="copyright-text">
-                    Copyright © {{ date('Y') }} | Powered by {{ get_setting('copy_right')->value ?? '' }}
-                </div>
-                <div class="developed-by">
-                    Developed by {{ get_setting('developed_by')->value ?? '' }}
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+ <footer class='map-footer'>
+     <div class="footer-contacts">
+         <div class="container">
+             <div class="row">
+                 <div class="col-xs-7 wow fadeInLeft" data-wow-delay="0.7s" data-wow-duration="1.5s">
+                     <div class="map">
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d29209.92479131221!2d90.37049872194054!3d23.77444520776812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sLink%20Road%2CShamoli%2CDhaka!5e0!3m2!1sen!2sbd!4v1766554167979!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                     </div>
+                 </div>
+                 <div class="col-xs-5 wow fadeInRight" data-wow-delay="0.7s" data-wow-duration="1.5s">
+                     <form action="https://pro-theme.com/" method="post" class="quick-form">
+                         <h2 class="title"><span class="title__bold">Quick</span>Contact</h2>
+                         <div class="quick-input">
+                             <input type="text" name="text" placeholder="Full Name" />
+                             <div class="triangle-quick-input"></div>
+                         </div>
+                         <div class="quick-input">
+                             <input type="text" name="phone" placeholder="Phone#" />
+                             <div class="triangle-quick-input"></div>
+                         </div>
+                         <div class="quick-input">
+                             <textarea placeholder="Message" name="mess"></textarea>
+                             <div class="triangle-quick-input"></div>
+                         </div>
+                         <button type="submit" class="btn button button--red button--main">SEND MESSAGE</button>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="footer-bottom">
+         <div class="container">
+             <div class="row">
+                 <div class="col-xs-7">
+                     <div class="copyright wow fadeInLeft" data-wow-delay="0.7s" data-wow-duration="1.5s">
+                         <p>&copy; Copyrights 2025 by <span>Speakup BD</span> | <span>BikerClub. </span> All rights
+                             reserved.</p>
+                     </div>
+                 </div>
+                 <div class="col-xs-5">
+                     <div class="social social--footer pull-right clearfix wow fadeInRight" data-wow-delay="0.7s"
+                         data-wow-duration="1.5s">
+                         <a href="#" class="social__one square">
+                             <span class="fa fa-twitter"></span>
+                         </a>
+                         <a href="#" class="social__one square">
+                             <span class="fa fa-facebook"></span>
+                         </a>
+                         <a href="#" class="social__one square">
+                             <span class="fa fa-google-plus"></span>
+                         </a>
+                         <a href="#" class="social__one square">
+                             <span class="fa fa-pinterest"></span>
+                         </a>
+                         <a href="#" class="social__one square">
+                             <span class="fa fa-instagram"></span>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <a id="to-top" href="#header-top"><i class="fa fa-chevron-up"></i></a>
+ </footer><!--map-footer-->
