@@ -61,7 +61,7 @@ Route::get('/order/success', [OrderController::class, 'success'])->name('product
 
 /* =========> End Frontend All Routes <========== */
 
-Route::redirect('/login', '/');
-Route::redirect('/register', '/');
+// Route::redirect('/login', '/');
+// Route::redirect('/register', '/');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

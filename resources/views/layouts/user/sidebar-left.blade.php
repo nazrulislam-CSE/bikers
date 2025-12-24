@@ -56,165 +56,21 @@
                 <li class="slide">
                     <a class="side-menu__item {{ Request::is('user') ? 'active' : '' }}" href="{{ route('user.home') }}"><i class="side-menu__icon fas fa-th-large"></i><span class="side-menu__label">Dashboard</span></a>
                 </li>
-                @if(Auth::check() && Auth::user()->status == 1)
-                    <li class="slide {{ Request::is('user/applicants*') ? 'is-expanded' : '' }}">
+                <li class="slide">
                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
                             <i class="side-menu__icon fas fa-users"></i>
-                            <span class="side-menu__label">Applicant</span>
+                            <span class="side-menu__label">Register My Bike</span>
                             <i class="angle fe fe-chevron-down"></i>
                         </a>
                         <ul class="slide-menu">
                             <li>
-                                <a class="slide-item {{ Request::is('user/applicants/create') ? 'active' : '' }}" href="{{ route('user.applicant.create') }}">Add Applicant</a>
+                                <a class="slide-item" href="#">Register My Bike</a>
                             </li>
                             <li>
-                                <a class="slide-item {{ Request::is('user/applicants/create') ? 'active' : '' }}" href="{{ route('user.applicant.index') }}">Applicant List</a>
+                                <a class="slide-item" href="#">Register My Bike List</a>
                             </li>
                         </ul>
                     </li>
-
-                    <li class="slide {{ Request::is('user/visa*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-user-graduate"></i>
-                            <span class="side-menu__label">Request Visa</span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li>
-                                <a class="slide-item {{ Request::is('user/visa/create') ? 'active' : '' }}" href="{{ route('user.visa.create') }}">Request Visa Create</a>
-                            </li>
-                            <li>
-                                <a class="slide-item {{ Request::is('user/visa/index') ? 'active' : '' }}" href="{{ route('user.visa.index') }}">Request Visa List</a>
-                            </li>
-                            <li>
-                                <a class="slide-item {{ Request::is('user/visa/success') ? 'active' : '' }}" href="{{ route('user.visa.success') }}">Success Visa List</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="slide {{ Request::is('user/withdraw*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-shopping-bag"></i>
-                            <span class="side-menu__label">Withdraw</span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li>
-                                <a class="slide-item {{ Request::is('user/withdraw/create') ? 'active' : '' }}" href="{{ route('user.withdraw.create') }}">Withdraw Now</a>
-                            </li>
-                            <li>
-                                <a class="slide-item {{ Request::is('user/withdraw/index') ? 'active' : '' }}" href="{{ route('user.withdraw.index') }}">Withdraw  List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="slide {{ Request::is('user/varsity*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-user-graduate"></i>
-                            <span class="side-menu__label">Varsity</span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li class="side-menu__label1"><a href="javascript:void(0);">Varsity</a></li>
-                            <li><a class="slide-item {{ Request::is('user/varsity/index') ? 'active' : '' }}" href="{{ route('user.varsity.index') }}">Varsity List</a></li>
-                        </ul>
-                    </li>
-                    <li class="slide {{ Request::is('user/passport*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-passport"></i>
-                            <span class="side-menu__label">Passport</span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li class="side-menu__label1"><a href="javascript:void(0);">Passport</a></li>
-                            <li><a class="slide-item {{ Request::is('user/passport/create') ? 'active' : '' }}" href="{{ route('user.passport.create') }}">Passport Add</a></li>
-                            <li><a class="slide-item {{ Request::is('user/passport/index') ? 'active' : '' }}" href="{{ route('user.passport.index') }}">Passport List</a></li>
-                            <li><a class="slide-item {{ Request::is('user/passport/success') ? 'active' : '' }}" href="{{ route('user.passport.success') }}">Success List</a></li>
-                            <li><a class="slide-item {{ Request::is('user/passport/received') ? 'active' : '' }}" href="{{ route('user.passport.received') }}">Received List</a></li>
-                            <li><a class="slide-item {{ Request::is('user/passport/back') ? 'active' : '' }}" href="{{ route('user.passport.back') }}">Back List</a></li>
-                        </ul>
-                    </li>
-                    <li class="slide {{ Request::is('user/supplier*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-store-alt"></i>
-                            <span class="side-menu__label">Supplier</span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li class="side-menu__label1"><a href="javascript:void(0);">Supplier</a></li>
-                            <li><a class="slide-item {{ Request::is('user/supplier/index') ? 'active' : '' }}" href="{{ route('user.supplier.index')}}">Supplier List</a></li>
-                            <li><a class="slide-item {{ Request::is('user/supplier/invoice/index') ? 'active' : '' }}" href="{{ route('user.supplier.invoice.index')}}">Invoice List</a></li>
-                        </ul>
-                    </li>
-                    <li class="slide {{ Request::is('user/voucher*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-building"></i>
-                            <span class="side-menu__label">Voucher</span>
-                            <span class="badge bg-success side-badge"></span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li class="side-menu__label1"><a href="javascript:void(0);">Voucher</a></li>
-                            <li><a class="slide-item {{ Request::is('user/voucher/create') ? 'active' : '' }}" href="{{ route('user.voucher.create') }}">Voucher Add</a></li>
-                            <li><a class="slide-item {{ Request::is('user/voucher/index') ? 'active' : '' }}" href="{{ route('user.voucher.index') }}">Voucher List</a></li>
-                        </ul>
-                    </li>
-    
-                    <li class="slide {{ Request::is('user/refund*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-building"></i>
-                            <span class="side-menu__label">Refund Money</span>
-                            <span class="badge bg-success side-badge"></span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li class="side-menu__label1"><a href="javascript:void(0);">Refund Money</a></li>
-                            <li><a class="slide-item {{ Request::is('user/refund/create') ? 'active' : '' }}" href="{{ route('user.refund.create') }}">Refund Add</a></li>
-                            <li><a class="slide-item {{ Request::is('user/refund/index') ? 'active' : '' }}" href="{{ route('user.refund.index') }}">Refund List</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="slide {{ Request::is('user/notices*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                            <i class="side-menu__icon fas fa-building"></i>
-                            <span class="side-menu__label">Notices</span>
-                            <span class="badge bg-success side-badge"></span>
-                            <i class="angle fe fe-chevron-down"></i>
-                        </a>
-                        <ul class="slide-menu">
-                            <li class="side-menu__label1"><a href="javascript:void(0);">Notices</a></li>
-                            <li><a class="slide-item {{ Request::is('user/notice/index') ? 'active' : '' }}" href="{{ route('user.notice.index') }}">Notice List</a></li>
-                        </ul>
-                    </li>
-                @else
-                    <p class="text-danger font-weight-bolder p-3">You are not authorized to access this content.please contact super admin.</p>
-                @endif
-
-                {{-- <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                        <i class="side-menu__icon fe fe-grid"></i>
-                        <span class="side-menu__label">Success Visa List</span>
-                        <i class="angle fe fe-chevron-down"></i>
-                    </a>
-                    <ul class="slide-menu">
-                        <li>
-                            <a class="slide-item {{ Request::is('user/visa/success') ? 'active' : '' }}" href="{{ route('user.visa.success')}}">Success Visa List</a>
-                        </li>
-                    </ul>
-                </li> --}}
-
-                {{-- <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
-                        <i class="side-menu__icon fe fe-grid"></i>
-                        <span class="side-menu__label">Agent Commission</span>
-                        <i class="angle fe fe-chevron-down"></i>
-                    </a>
-                    <ul class="slide-menu">
-                        <li>
-                            <a class="slide-item" href="#">Agent Commission List</a>
-                        </li>
-                    </ul>
-                </li> --}}
-
             </ul>
 
             <div class="slide-right" id="slide-right">

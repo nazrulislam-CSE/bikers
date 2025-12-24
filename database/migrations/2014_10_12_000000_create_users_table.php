@@ -13,17 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name')->nullable();
-            $table->string('owner_name')->nullable();
+            $table->string('name')->nullable();
             $table->string('username')->nullable();
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('phone')->nullable();
-            $table->double('visa_amount')->default(0.00)->comment('Total Visa Amount')->ullable();
-            $table->double('withdraw_amount')->default(0.00)->comment('Total Withdraw Amount')->nullable();
-            $table->double('v_total_amount')->default(0.00)->comment('Total Voucher Amount')->nullable();
-            $table->double('voucher_amount')->default(0.00)->comment('Total Due Amount')->nullable();
-            $table->double('v_advance_payment')->default(0.00)->comment('Total Advance Amount')->nullable();
             $table->string('image')->default('user.png')->nullable();
             $table->string('city_name')->nullable();
             $table->integer('established_year')->nullable();

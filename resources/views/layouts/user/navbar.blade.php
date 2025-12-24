@@ -13,7 +13,6 @@
             <ul class="header-megamenu-dropdown  nav">
                 <div class="text-center">
                     <a href="{{ route('frontend.home')}}" target="_blank" class="btn btn-success mx-2"><i class="fa fa-share"></i> View Website</a>
-                    <a href="{{ route('user.visa.create')}}" target="_blank" class="btn btn-danger mx-2"><i class="fa fa-share"></i> Apply Now</a>
                 </div>
                 
                 {{-- <li class="nav-item">

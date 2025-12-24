@@ -88,10 +88,7 @@ class SettingController extends Controller
         // ]);
 
         $profile = User::where('id',Auth::user()->id)->first();
-        $profile->company_name = $request->company_name;
-        $profile->owner_name = $request->owner_name;
-        $profile->city_name = $request->city_name;
-        $profile->established_year = $request->established_year;
+        $profile->name = $request->name;
         $profile->nid_number = $request->nid_number;
         $profile->username = $request->username;
         $profile->email = $request->email;

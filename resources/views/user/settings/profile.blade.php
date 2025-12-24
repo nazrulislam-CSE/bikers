@@ -15,16 +15,11 @@
                         <div class="d-flex justify-content-between mg-b-20 mt-2">
                             <div>
                                 <div class="align-items-center">
-                                    <h5 class="main-profile-name">Company Name: {{ $profile->company_name ?? 'n/a' }} </h5>
-                                    <h5 class="main-profile-name">Owner Name: {{ $profile->owner_name ?? 'n/a' }} </h5>
-                                    <h5 class="">Username: {{ $profile->username ?? 'n/a' }} </h5>
-                                    <h5 class="">Email: {{ $profile->email ?? 'n/a' }} </h5>
-                                    <h5 class="">Phone: {{ $profile->phone ?? 'n/a' }} </h5>
-                                    <h5 class="">Designation: {{ $profile->designation ?? 'n/a' }} </h5>
-                                    <h6 class="">City Name: {{ $profile->city_name ?? 'n/a' }} </h6>
-                                    <h6 class="">Established Year: {{ $profile->established_year ?? 'n/a' }} </h6>
-                                    <h6 class="">Nid Number: {{ $profile->nid_number ?? 'n/a' }} </h6>
-                                    <h6 class="">Password: {{ $profile->show_password ?? 'n/a' }} </h6>
+                                    <h5 class="main-profile-name">Name: {{ $profile->name ?? '' }} </h5>
+                                    <h5 class="">Username: {{ $profile->username ?? '' }} </h5>
+                                    <h5 class="">Email: {{ $profile->email ?? '' }} </h5>
+                                    <h5 class="">Phone: {{ $profile->phone ?? '' }} </h5>
+                                    <h6 class="">Password: {{ $profile->show_password ?? '' }} </h6>
                                     <h6 class="">Created At: {{ $profile->created_at }} </h6>
                                     <h6 class="">Status: 
                                         @if($profile->status == 1)
@@ -55,55 +50,11 @@
                     <div class="form-group mb-2">
                         <div class="row">
                             <div class="col-4 d-flex align-items-center">
-                                <label class="form-label mb-0">Company Name</label>
+                                <label class="form-label mb-0">Name</label>
                             </div>
                             <div class="col-1 d-flex align-items-center"><span>:</span></div>
                             <div class="col-7">
-                                <input type="text" name="company_name" id="company_name" class="form-control bg-white" placeholder="Enter Company Name" value="{{ $profile->company_name ?? 'Null'}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-2">
-                        <div class="row">
-                            <div class="col-4 d-flex align-items-center">
-                                <label class="form-label mb-0">Owner Name</label>
-                            </div>
-                            <div class="col-1 d-flex align-items-center"><span>:</span></div>
-                            <div class="col-7">
-                                <input type="text" name="owner_name" id="owner_name" class="form-control bg-white" placeholder="Enter Company Owner Name" value="{{ $profile->owner_name ?? 'Null'}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-2">
-                        <div class="row">
-                            <div class="col-4 d-flex align-items-center">
-                                <label class="form-label mb-0">City Name</label>
-                            </div>
-                            <div class="col-1 d-flex align-items-center"><span>:</span></div>
-                            <div class="col-7">
-                                <input type="text" name="city_name" id="city_name" class="form-control bg-white" placeholder="Enter City Name" value="{{ $profile->city_name ?? 'Null'}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-2">
-                        <div class="row">
-                            <div class="col-4 d-flex align-items-center">
-                                <label class="form-label mb-0">Established Year</label>
-                            </div>
-                            <div class="col-1 d-flex align-items-center"><span>:</span></div>
-                            <div class="col-7">
-                                <input type="number" min="0" name="established_year" id="established_year" class="form-control bg-white" placeholder="Enter Established year" value="{{ $profile->established_year ?? 'Null'}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-2">
-                        <div class="row">
-                            <div class="col-4 d-flex align-items-center">
-                                <label class="form-label mb-0">Nid Number</label>
-                            </div>
-                            <div class="col-1 d-flex align-items-center"><span>:</span></div>
-                            <div class="col-7">
-                                <input type="text" name="nid_number" id="nid_number" class="form-control bg-white" placeholder="Enter Nid Number" value="{{ $profile->nid_number ?? 'Null'}}">
+                                <input type="text" name="name" id="name" class="form-control bg-white" placeholder="Enter Name" value="{{ $profile->name ?? ''}}">
                             </div>
                         </div>
                     </div>
@@ -137,17 +88,6 @@
                             <div class="col-1 d-flex align-items-center"><span>:</span></div>
                             <div class="col-7">
                                 <input type="number" min="0" name="phone" id="phone" class="form-control bg-white" placeholder="Phone" value="{{ $profile->phone }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-2">
-                        <div class="row">
-                            <div class="col-4 d-flex align-items-center">
-                                <label class="form-label mb-0">Designation</label>
-                            </div>
-                            <div class="col-1 d-flex align-items-center"><span>:</span></div>
-                            <div class="col-7">
-                                <input type="text" min="0" name="designation" id="designation" class="form-control bg-white" placeholder="Designation" value="{{ $profile->designation }}">
                             </div>
                         </div>
                     </div>

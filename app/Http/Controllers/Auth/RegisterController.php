@@ -56,12 +56,8 @@ class RegisterController extends Controller
     {
     
         return Validator::make($data, [
-            'company_name' => ['required'],
-            'owner_name' => ['required'],
-            'city_name' => ['required'],
-            'established_year' => ['required',],
-            // 'nid_number' => ['required'],
-            'designation' => ['required'],
+            'name' => ['required'],
+            'username' => ['required'],
             'phone' => ['required',],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -77,30 +73,16 @@ class RegisterController extends Controller
      */
     public function create(array $data)
     {
-        // dd($data);
         $user = User::create([
-            'company_name' => $data['company_name'],
-            'owner_name' => $data['owner_name'],
-            'city_name' => $data['city_name'],
-            'established_year' => $data['established_year'],
-            // 'nid_number' => $data['nid_number'],
-            'designation' => $data['designation'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'username' => $data['username'],
+            'email'    => $data['email'],
+            'phone'    => $data['phone'],
             'password' => Hash::make($data['password']),
-            'show_password' => $data['password'],
-            'username' => $data['company_name'],
-            'phone' => $data['phone'],
-            'created_by' => $data['company_name'],
         ]);
 
-        flash()->addSuccess('User Register Successfully.');
+        flash()->addSuccess('Account Created Successfully. Please login.');
 
-        // DB::table('model_has_roles')->insert([
-        //     'role_id' => 1,
-        //     'model_type' => 'App\Models\User',
-        //     'model_id' => $user->id,
-        // ]);
-      
         return $user;
     }
 }
