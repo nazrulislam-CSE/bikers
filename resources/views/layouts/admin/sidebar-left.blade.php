@@ -62,6 +62,19 @@
                             class="side-menu__label">Dashboard</span></a>
                 </li>
 
+                 <li class="slide {{ Request::is('admin/bike/register*') ? 'is-expanded' : '' }}">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+                        <i class="side-menu__icon fas fa-store-alt"></i>
+                        <span class="side-menu__label">Bike Registration List</span>
+                        <i class="angle fe fe-chevron-down hor-angle"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li class="side-menu__label1"><a href="javascript:void(0);">Bike Registration Lists</a></li>
+                        <li><a class="slide-item {{ Request::is('admin/bike/register/index') ? 'active' : '' }}"
+                                href="{{ route('admin.bike.register.index') }}">Bike Registration List</a></li>
+                    </ul>
+                </li>
+
                 <li class="slide {{ Request::is('admin/sections*') ? 'is-expanded' : '' }}">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
                         <i class="side-menu__icon fas fa-store-alt"></i>

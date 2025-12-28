@@ -282,11 +282,11 @@
                             </div>
                         </div>
                         <div class="dropdown main-profile-menu nav nav-item nav-link">
-                            <a class="profile-user d-flex" href=""><img src="{{ (!empty( Auth::user()->image)) ? url('upload/user_images/'.Auth::user()->image):url('upload/default.png') }}" alt="user-img" class="rounded-circle mCS_img_loaded bg-white"><span></span></a>
+                            <a class="profile-user d-flex" href=""><img src="{{ (!empty( Auth::user()->image)) ? url('upload/user_images/'.Auth::user()->image):url('upload/avater5.png') }}" alt="user-img" class="rounded-circle mCS_img_loaded bg-white"><span></span></a>
 
                             <div class="dropdown-menu">
                                 <div class="main-header-profile header-img">
-                                    <div class="main-img-user border bg-white"><img alt="" src="{{ (!empty( Auth::user()->image)) ? url('upload/user_images/'.Auth::user()->image):url('upload/default.png') }}"></div>
+                                    <div class="main-img-user border bg-white"><img alt="" src="{{ (!empty( Auth::user()->image)) ? url('upload/user_images/'.Auth::user()->image):url('upload/avater5.png') }}"></div>
                                     <h6>{{ Auth::user()->name }}</h6><span>{{ Auth::user()->username }}</span>
                                 </div>
                                 <a class="dropdown-item" href="{{ route('user.profile.view') }}"><i class="far fa-user"></i> My Profile</a>

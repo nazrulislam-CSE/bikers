@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\BikeRegistrationController;
 
 
 
@@ -194,6 +195,20 @@ Route::middleware('admin')->group(function () {
         Route::post('/update/{id}', [PartnerController::class, 'update'])->name('partner.update');
         Route::get('/delete/{id}', [PartnerController::class, 'destroy'])->name('partner.delete');
         Route::get('/show/{id}', [PartnerController::class,'show'])->name('partner.show');
+
+    });
+
+    /* ============> Manage Bike Register Admin Panel   <=========== */
+    Route::prefix('bike/register')->group(function () {
+        Route::get('/index', [BikeRegistrationController::class, 'index'])->name('bike.register.index');
+        Route::get('/create', [BikeRegistrationController::class, 'create'])->name('bike.register.create');
+        Route::post('/store', [BikeRegistrationController::class, 'store'])->name('bike.register.store');
+        Route::get('/edit/{id}', [BikeRegistrationController::class, 'edit'])->name('bike.register.edit');
+        Route::put('/update/{id}', [BikeRegistrationController::class, 'update'])->name('bike.register.update');
+        Route::get('/show/{id}', [BikeRegistrationController::class,'show'])->name('bike.register.show');
+        Route::get('/delete/{id}', [BikeRegistrationController::class,'destroy'])->name('bike.register.delete');
+        Route::get('/status/{id}',[BikeRegistrationController::class,'changeStatus'])->name('bike.register.status');
+
 
     });
 

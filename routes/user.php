@@ -8,6 +8,7 @@ use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\ReceiveController;
 use App\Http\Controllers\User\ExpenseController;
 use App\Http\Controllers\User\SettingController;
+use App\Http\Controllers\User\BikeRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
@@ -88,6 +89,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/update/{id}', [AgentSupplierInvoiceController::class, 'update'])->name('supplier.invoice.update');
         Route::get('/delete/{id}', [AgentSupplierInvoiceController::class, 'destroy'])->name('supplier.invoice.delete');
         Route::get('/show/{id}', [AgentSupplierInvoiceController::class,'show'])->name('supplier.invoice.show');
+
+    });
+
+    /* ============> Manage Bike Register   <=========== */
+    Route::prefix('bike/register')->group(function () {
+        Route::get('/index', [BikeRegistrationController::class, 'index'])->name('bike.register.index');
+        Route::get('/create', [BikeRegistrationController::class, 'create'])->name('bike.register.create');
+        Route::post('/store', [BikeRegistrationController::class, 'store'])->name('bike.register.store');
+        Route::get('/show/{id}', [BikeRegistrationController::class,'show'])->name('bike.register.show');
 
     });
 });

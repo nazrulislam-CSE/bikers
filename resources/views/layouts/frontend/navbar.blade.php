@@ -90,17 +90,34 @@
                              </li>
                              <li><a class="no-decoration" href="about.html">About us</a><span
                                      class="main-nav__separator"><span></span><span></span><span></span></span></li>
-                             <li><a class="no-decoration" href="shop.html">Offer</a><span
-                                     class="main-nav__separator"><span></span><span></span><span></span></span></li>
                              <li><a class="no-decoration" href="article.html">Services</a><span
-                                     class="main-nav__separator"><span></span><span></span><span></span></span></li>
-                             <li><a class="no-decoration" href="item.html">Listings</a><span
                                      class="main-nav__separator"><span></span><span></span><span></span></span></li>
                              <li><a class="no-decoration" href="blog.html">Blog</a><span
                                      class="main-nav__separator"><span></span><span></span><span></span></span></li>
                              <li><a class="no-decoration" href="contacts.html">Contact</a><span
                                      class="main-nav__separator"><span></span><span></span><span></span></span></li>
                              <li><a class="no-decoration" href="shop.html">Shop</a></li>
+                                @if(Auth::guard('admin')->check())
+                                    {{-- Admin logged in --}}
+                                    <li>
+                                        <a class="no-decoration" href="{{ route('admin.admin.home') }}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+
+                                @elseif(Auth::check())
+                                    {{-- Normal user logged in --}}
+                                    <li>
+                                        <a class="no-decoration" href="{{ route('user.home') }}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+
+                                @else
+                                    {{-- Nobody logged in --}}
+                                    <li><a class="no-decoration" href="{{ route('login') }}">Login</a></li>
+                                    <li><a class="no-decoration" href="{{ route('register') }}">Register</a></li>
+                                @endif
                          </ul>
                          <div class="search-form-modal transition">
                              <form class="navbar-form header_search_form">
