@@ -98,6 +98,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/create', [BikeRegistrationController::class, 'create'])->name('bike.register.create');
         Route::post('/store', [BikeRegistrationController::class, 'store'])->name('bike.register.store');
         Route::get('/show/{id}', [BikeRegistrationController::class,'show'])->name('bike.register.show');
+        Route::get('/payment', [BikeRegistrationController::class,'payment'])->name('bike.register.payment');
+        Route::get('/payment/now', [BikeRegistrationController::class,'paymentNow'])->name('bike.register.payment.now');
+        Route::post('/payment/store', [BikeRegistrationController::class,'paymentStore'])->name('bike.register.payment.store');
 
     });
 });

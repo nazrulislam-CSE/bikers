@@ -208,6 +208,15 @@ Route::middleware('admin')->group(function () {
         Route::get('/show/{id}', [BikeRegistrationController::class,'show'])->name('bike.register.show');
         Route::get('/delete/{id}', [BikeRegistrationController::class,'destroy'])->name('bike.register.delete');
         Route::get('/status/{id}',[BikeRegistrationController::class,'changeStatus'])->name('bike.register.status');
+        Route::get('/payment/index/',[BikeRegistrationController::class,'paymentIndex'])->name('bike.register.payment');
+        Route::delete('/{id}', [BikeRegistrationController::class, 'destroyPayment'])->name('bike.register.payment.destroy');
+        // Approval actions
+        Route::post('/{id}/approve', [BikeRegistrationController::class, 'approvePayment'])->name('bike.register.payment.approve');
+        Route::post('/{id}/reject', [BikeRegistrationController::class, 'rejectPayment'])->name('bike.register.payment.reject');
+        Route::post('/{id}/block', [BikeRegistrationController::class, 'blockPayment'])->name('bike.register.payment.block');
+        Route::post('/{id}/unblock', [BikeRegistrationController::class, 'unblockPayment'])->name('bike.register.payment.unblock');
+        Route::get('/{id}/slip', [BikeRegistrationController::class, 'viewSlipPayment'])->name('bike.register.payment.view.slip');
+        Route::get('/report', [BikeRegistrationController::class, 'reportPayment'])->name('bike.register.payment.report');
 
 
     });

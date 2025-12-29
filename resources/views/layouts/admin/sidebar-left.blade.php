@@ -72,6 +72,8 @@
                         <li class="side-menu__label1"><a href="javascript:void(0);">Bike Registration Lists</a></li>
                         <li><a class="slide-item {{ Request::is('admin/bike/register/index') ? 'active' : '' }}"
                                 href="{{ route('admin.bike.register.index') }}">Bike Registration List</a></li>
+                        <li><a class="slide-item {{ Request::is('admin/bike/register/payment/index') ? 'active' : '' }}"
+                                href="{{ route('admin.bike.register.payment') }}">Bike Payment List</a></li>
                     </ul>
                 </li>
 

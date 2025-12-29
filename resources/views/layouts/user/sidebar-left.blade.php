@@ -77,6 +77,9 @@
                         <li>
                             <a class="slide-item {{ Request::is('user/bike/register/index') ? 'active' : '' }}" href="{{ route('user.bike.register.index') }}">Register My Bike List</a>
                         </li>
+                        <li>
+                            <a class="slide-item {{ Request::is('user/bike/register/payment') ? 'active' : '' }}" href="{{ route('user.bike.register.payment') }}">Payment List</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

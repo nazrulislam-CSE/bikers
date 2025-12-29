@@ -22,7 +22,7 @@
                 <div class="row row-sm mb-3">
 
                     {{-- Total Bikes --}}
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="card shadow-lg border-0 text-center">
                             <div class="card-body">
                                 <div class="mb-2">
@@ -35,7 +35,7 @@
                     </div>
 
                     {{-- Approved --}}
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="card shadow-lg border-0 text-center">
                             <div class="card-body">
                                 <div class="mb-2">
@@ -48,7 +48,7 @@
                     </div>
 
                     {{-- Pending --}}
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="card shadow-lg border-0 text-center">
                             <div class="card-body">
                                 <div class="mb-2">
@@ -59,20 +59,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- Today Due --}}
-                    <div class="col-lg-3 col-md-6 mb-3">
-                        <div class="card shadow-lg border-0 text-center">
-                            <div class="card-body">
-                                <div class="mb-2">
-                                    <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
-                                </div>
-                                <h6 class="text-muted">Today Due</h6>
-                                <h3 class="text-danger fw-bold">0</h3>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="card">

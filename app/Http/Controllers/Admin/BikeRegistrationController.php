@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BikeRegistration;
+use App\Models\BikePayment;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
@@ -174,4 +175,211 @@ class BikeRegistrationController extends Controller
         return redirect($url);
     }
 
+     /**
+     * Display payment list
+     */
+    public function paymentIndex(Request $request)
+    {
+        $pageTitle = 'Bike Payment List';
+        
+        $query = BikePayment::with(['user', 'bike'])->latest();
+        
+        // Filter by status if provided
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+        
+        // Filter by approval status if provided
+        if ($request->has('approval_status') && $request->approval_status != '') {
+            $query->where('approval_status', $request->approval_status);
+        }
+        
+        // Filter by payment method if provided
+        if ($request->has('payment_method') && $request->payment_method != '') {
+            $query->where('payment_method', $request->payment_method);
+        }
+        
+        // Search functionality
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->whereHas('user', function($userQuery) use ($search) {
+                    $userQuery->where('name', 'like', "%{$search}%")
+                              ->orWhere('email', 'like', "%{$search}%")
+                              ->orWhere('phone', 'like', "%{$search}%");
+                })
+                ->orWhereHas('bike', function($bikeQuery) use ($search) {
+                    $bikeQuery->where('registration_number', 'like', "%{$search}%")
+                              ->orWhere('owner_name', 'like', "%{$search}%");
+                })
+                ->orWhere('plan', 'like', "%{$search}%")
+                ->orWhere('payment_method', 'like', "%{$search}%");
+            });
+        }
+        
+        $payments = $query->paginate(20);
+        
+        // Get statistics
+        $totalPayments = BikePayment::count();
+        $pendingPayments = BikePayment::where('approval_status', 'pending')->count();
+        $approvedPayments = BikePayment::where('approval_status', 'approved')->count();
+        $totalRevenue = BikePayment::where('approval_status', 'approved')->sum('total_paid');
+        
+        return view('admin.bike.payment.index', compact(
+            'pageTitle',
+            'payments',
+            'totalPayments',
+            'pendingPayments',
+            'approvedPayments',
+            'totalRevenue'
+        ));
+    }
+
+    /**
+     * Show payment details
+     */
+    public function showPayment($id)
+    {
+        $payment = BikePayment::with(['user', 'bike'])->findOrFail($id);
+        $pageTitle = 'Payment Details';
+        
+        return view('admin.bike.payment.show', compact('payment', 'pageTitle'));
+    }
+
+    /**
+     * Approve a payment
+     */
+    public function approvePayment(Request $request, $id)
+    {
+        $payment = BikePayment::findOrFail($id);
+        
+        // Check if payment is already approved
+        if ($payment->approval_status == 'approved') {
+            return redirect()->route('admin.bike.register.payment')
+                ->with('error', 'Payment is already approved!');
+        }
+        
+        // Update payment status
+        $payment->due_days = max(0, $payment->due_days - 1);
+        $payment->due_amount = max(0, $payment->due_amount - $payment->fixed_amount);
+        $payment->total_paid += $payment->fixed_amount;
+        $payment->last_paid_date = now();
+        $payment->approval_status = 'approved';
+        $payment->save();
+        
+        // Auto-block if due days exceed limit
+        $payment->autoBlock();
+        
+        return redirect()->route('admin.bike.register.payment')
+            ->with('success', 'Payment approved successfully!');
+    }
+
+    /**
+     * Reject a payment
+     */
+    public function rejectPayment(Request $request, $id)
+    {
+        $payment = BikePayment::findOrFail($id);
+        
+        $request->validate([
+            'rejection_reason' => 'required|string|max:500',
+        ]);
+        
+        $payment->update([
+            'approval_status' => 'rejected',
+            'notes' => $request->rejection_reason . (($payment->notes ? "\n\n" : '') . $payment->notes),
+        ]);
+        
+        return redirect()->route('admin.bike.register.payment.index')
+            ->with('success', 'Payment rejected successfully!');
+    }
+
+    /**
+     * Block a payment
+     */
+    public function blockPayment($id)
+    {
+        $payment = BikePayment::findOrFail($id);
+        $payment->update(['status' => 'blocked']);
+        
+        return redirect()->route('admin.bike.register.payment')
+            ->with('success', 'Payment blocked successfully!');
+    }
+
+    /**
+     * Unblock a payment
+     */
+    public function unblockPayment($id)
+    {
+        $payment = BikePayment::findOrFail($id);
+        $payment->update(['status' => 'active']);
+        
+        return redirect()->route('admin.bike.register.payment')
+            ->with('success', 'Payment unblocked successfully!');
+    }
+
+    /**
+     * Delete a payment
+     */
+    public function destroyPayment($id)
+    {
+        $payment = BikePayment::findOrFail($id);
+        
+        // Delete payment slip if exists
+        if ($payment->payment_slip && \Illuminate\Support\Facades\Storage::disk('public')->exists($payment->payment_slip)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($payment->payment_slip);
+        }
+        
+        $payment->delete();
+        
+        return redirect()->route('admin.bike.register.payment')
+            ->with('success', 'Payment deleted successfully!');
+    }
+
+    /**
+     * View payment slip
+     */
+    public function viewSlipPayment($id)
+    {
+        $payment = BikePayment::findOrFail($id);
+        
+        if (!$payment->payment_slip) {
+            abort(404, 'Payment slip not found.');
+        }
+        
+        $path = storage_path('app/public/' . $payment->payment_slip);
+        
+        if (!file_exists($path)) {
+            abort(404, 'Payment slip file not found.');
+        }
+        
+        return response()->file($path);
+    }
+
+    /**
+     * Generate payment report
+     */
+    public function reportPayment(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'report_type' => 'required|in:all,approved,pending,rejected',
+        ]);
+        
+        $query = BikePayment::with(['user', 'bike'])
+            ->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+        
+        if ($request->report_type != 'all') {
+            $query->where('approval_status', $request->report_type);
+        }
+        
+        $payments = $query->get();
+        
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $report_type = $request->report_type;
+        
+        return view('admin.bike.payment.report', compact('payments', 'start_date', 'end_date', 'report_type'));
+    }
 }
